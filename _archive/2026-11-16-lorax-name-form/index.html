@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Name Submission</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ground: #f6f3ee;
+      --surface: #ffffff;
+      --ink: #1f2a24;
+      --ink-soft: #55615a;
+      --line: #d8d2c7;
+      --accent: #2f5d46;
+      --accent-ink: #ffffff;
+      --error: #a1321f;
+      --focus: #2f5d46;
+      --radius: 6px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--ground);
+      color: var(--ink);
+      font: 400 1rem/1.6 "DM Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: clamp(2.5rem, 8vw, 5rem) 1rem 4rem;
+    }
+    .eyebrow {
+      margin: 0 0 .75rem;
+      font-size: .8125rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h1 {
+      margin: 0 0 .75rem;
+      font: 400 clamp(2rem, 6vw, 2.75rem)/1.1 "DM Serif Display", Georgia, serif;
+    }
+    .intro { margin: 0 0 2.5rem; color: var(--ink-soft); max-width: 34rem; }
+
+    form {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(1.25rem, 4vw, 2.25rem);
+    }
+    .row { display: grid; gap: 1.25rem; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+
+    .field { margin-bottom: 1.5rem; }
+    label, .legend {
+      display: block;
+      margin-bottom: .4rem;
+      font-weight: 600;
+      font-size: .9375rem;
+    }
+    .hint { display: block; font-weight: 400; font-size: .875rem; color: var(--ink-soft); margin-top: .1rem; }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: .75rem .875rem;
+      font: inherit;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: border-color .15s;
+    }
+    textarea { min-height: 9rem; resize: vertical; }
+    input[type="text"]:hover, textarea:hover { border-color: #b9b1a3; }
+    input:focus-visible, textarea:focus-visible, button:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+    [aria-invalid="true"] { border-color: var(--error) !important; }
+    .error { display: block; margin-top: .35rem; font-size: .875rem; color: var(--error); }
+    .error:empty { display: none; }
+
+    fieldset { border: 0; padding: 0; margin: 0 0 1.75rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+    .check {
+      display: grid;
+      grid-template-columns: 1.25rem 1fr;
+      gap: .75rem;
+      align-items: start;
+      margin-bottom: 1rem;
+      font-weight: 400;
+      cursor: pointer;
+    }
+    .check input {
+      width: 1.25rem; height: 1.25rem; margin: .15rem 0 0;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .check a { color: var(--accent); text-underline-offset: 2px; }
+
+    button {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      min-height: 3rem;
+      padding: .75rem 2rem;
+      font: 600 1rem/1 "DM Sans", system-ui, sans-serif;
+      color: var(--accent-ink);
+      background: var(--accent);
+      border: 0;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background .15s;
+    }
+    button:hover { background: #244a37; }
+    button[disabled] { opacity: .6; cursor: progress; }
+    @media (max-width: 520px) { button { width: 100%; } }
+
+    .status { margin-top: 1.25rem; font-size: .9375rem; }
+    .status:empty { display: none; }
+    .status.is-error { color: var(--error); }
+
+    .thanks { text-align: left; }
+    .thanks h2 { margin: 0 0 .5rem; font: 400 1.75rem/1.2 "DM Serif Display", Georgia, serif; }
+    .thanks p { margin: 0 0 1.5rem; color: var(--ink-soft); }
+    .link-btn { background: none; color: var(--accent); padding: 0; min-height: auto; text-decoration: underline; text-underline-offset: 3px; }
+    .link-btn:hover { background: none; color: #244a37; }
+
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Submission</p>
+    <h1>Suggest a Lorax name</h1>
+    <p class="intro">Tell us the name and why it fits. Every submission is read.</p>
+
+    <form id="form" novalidate>
+      <div class="row">
+        <div class="field">
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" autocomplete="given-name" required aria-describedby="firstName-err">
+          <span class="error" id="firstName-err"></span>
+        </div>
+        <div class="field">
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" autocomplete="family-name" required aria-describedby="lastName-err">
+          <span class="error" id="lastName-err"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="loraxName">Suggested Lorax name</label>
+        <input type="text" id="loraxName" name="loraxName" autocomplete="off" required maxlength="120" aria-describedby="loraxName-err">
+        <span class="error" id="loraxName-err"></span>
+      </div>
+
+      <div class="field">
+        <label for="reasons">Reasons <span class="hint">Why this name? What does it say?</span></label>
+        <textarea id="reasons" name="reasons" required maxlength="3000" aria-describedby="reasons-err"></textarea>
+        <span class="error" id="reasons-err"></span>
+      </div>
+
+      <fieldset>
+        <legend class="visually-hidden">Confirmations</legend>
+        <label class="check">
+          <input type="checkbox" id="noCopyright" name="noCopyright" value="yes" required aria-describedby="noCopyright-err">
+          <span>The name above does not infringe copyright.</span>
+        </label>
+        <span class="error" id="noCopyright-err"></span>
+        <label class="check">
+          <input type="checkbox" id="notRegistered" name="notRegistered" value="yes" required aria-describedby="notRegistered-err">
+          <span>The name above is not a registered entity. <a href="https://ised-isde.canada.ca/cbr-rec/" target="_blank" rel="noopener">Check the Canadian Business Registry<span class="visually-hidden"> (opens in a new tab)</span></a></span>
+        </label>
+        <span class="error" id="notRegistered-err"></span>
+      </fieldset>
+
+      <!-- Spam trap: real people never see or fill this -->
+      <div class="hp" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button type="submit" id="submit">Submit</button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <section class="thanks" id="thanks" hidden tabindex="-1">
+      <h2>Thank you.</h2>
+      <p>Your suggestion is in.</p>
+      <button type="button" class="link-btn" id="again">Submit another name</button>
+    </section>
+  </main>
+
+  <script>
+    // Paste the Google Apps Script web-app URL here (see docs/SETUP.md).
+    const SCRIPT_URL = "";
+
+    const form = document.getElementById("form");
+    const statusEl = document.getElementById("status");
+    const submitBtn = document.getElementById("submit");
+    const thanks = document.getElementById("thanks");
+
+    const messages = {
+      firstName: "Please enter your first name.",
+      lastName: "Please enter your last name.",
+      loraxName: "Please enter a name.",
+      reasons: "Please tell us why.",
+      noCopyright: "Please confirm the name does not infringe copyright.",
+      notRegistered: "Please confirm the name is not a registered entity."
+    };
+
+    function validate() {
+      let firstBad = null;
+      for (const id of Object.keys(messages)) {
+        const el = document.getElementById(id);
+        const ok = el.type === "checkbox" ? el.checked : el.value.trim() !== "";
+        el.setAttribute("aria-invalid", ok ? "false" : "true");
+        document.getElementById(id + "-err").textContent = ok ? "" : messages[id];
+        if (!ok && !firstBad) firstBad = el;
+      }
+      if (firstBad) firstBad.focus();
+      return !firstBad;
+    }
+
+    form.addEventListener("input", (e) => {
+      if (e.target.getAttribute("aria-invalid") === "true") {
+        const el = e.target;
+        const ok = el.type === "checkbox" ? el.checked : el.value.trim() !== "";
+        if (ok) {
+          el.setAttribute("aria-invalid", "false");
+          document.getElementById(el.id + "-err").textContent = "";
+        }
+      }
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "";
+      statusEl.classList.remove("is-error");
+      if (!validate()) return;
+
+      if (!SCRIPT_URL) {
+        statusEl.classList.add("is-error");
+        statusEl.textContent = "This form isn't connected to a spreadsheet yet.";
+        return;
+      }
+
+      const data = new URLSearchParams(new FormData(form));
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+
+      try {
+        const res = await fetch(SCRIPT_URL, { method: "POST", body: data });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error || "Submission failed");
+        form.reset();
+        form.hidden = true;
+        thanks.hidden = false;
+        thanks.focus();
+      } catch (err) {
+        statusEl.classList.add("is-error");
+        statusEl.textContent = "Something went wrong and your submission wasn't saved. Please try again.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
+      }
+    });
+
+    document.getElementById("again").addEventListener("click", () => {
+      thanks.hidden = true;
+      form.hidden = false;
+      document.getElementById("firstName").focus();
+    });
+  </script>
+</body>
+</html>
