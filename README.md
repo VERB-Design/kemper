@@ -1,6 +1,6 @@
 # KemperSports — Homepage 2026 (Design canvas export)
 
-- `Main.dc.html` — the homepage artboard (Claude Design component format). Asset paths point to `assets/`.
+- `index.html` — the homepage artboard (Claude Design component format). Asset paths point to `assets/`.
 - `canvas.json` — canvas index.
 - `assets/` — every image plus the hero video (`hero.mp4`, 1080p, muted, 9 MB) and its poster.
 

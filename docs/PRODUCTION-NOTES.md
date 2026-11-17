@@ -7,7 +7,7 @@ Earlier contents of this folder (Lorax name-submission form, Apps Script, setup 
 ## Warnings
 
 **Robustness**
-- `Main.dc.html` needs the Claude Design runtime `support.js`, which the zip didn't include. I copied it in from `../BCG/site/support.js`. All six copies across projects have the same md5 (`951ae391…`). If Claude Design ever changes the runtime, refresh this copy.
+- `index.html` (formerly `Main.dc.html`) needs the Claude Design runtime `support.js`, which the zip didn't include. I copied it in from `../BCG/site/support.js`. All six copies across projects have the same md5 (`951ae391…`). If Claude Design ever changes the runtime, refresh this copy.
 - ~~Mobile breaks at 390px.~~ **Resolved 2026-11-16.** The real cause was the missing viewport meta tag, so phones laid the page out at 980px. Added the tag, plus a `max-width:760px` block that does the following:
   - Stacks "Who we serve" vertically and turns off its sideways scroll.
   - Shortens the pinned "What we do" section and puts it on the 20px gutter.
@@ -95,3 +95,4 @@ Earlier contents of this folder (Lorax name-submission form, Apps Script, setup 
 - 2026-11-17: all eyebrows now match the "Who we serve" chapter labels: uppercase with 0.06em tracking, weight 700. That covers "How we operate", the Extend card kinds, the "What we do" stage image tag, and the three footer column heads.
 - 2026-11-17: H2 line-height is 1.2 everywhere (the `.h2` class plus the serve, operate, properties and close headings, which were 1.04 to 1.15).
 - 2026-11-17: "How we operate" background swapped to `assets/operate-bg.jpg`, a palm-lined desert green that appears nowhere else on the page. Source: `~/Downloads/cover-kemper.jpg` (1700x2200, portrait), set at cover with `object-position: 50% 45%` and 10% opacity. Every image in the original asset folder was already in use. **Licensing:** this file came from Downloads with no provenance; confirm it's a KemperSports-owned or licensed image.
+- 2026-11-17: `Main.dc.html` renamed to `index.html`, replacing the redirect stub, so the GitHub Pages root serves the homepage directly. `canvas.json` and the README are updated to match. The local URL is now http://localhost:8082/ .
