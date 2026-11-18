@@ -56,6 +56,11 @@ img,video{display:block;max-width:100%}
 .navlink:hover::after,.navlink:focus-visible::after{opacity:1}
 .flink{color:#C3CAC5;text-decoration:none;font-size:14px;padding:8px 0;display:block}
 .flink:hover{color:#FFFFFF}
+.g-foot-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px}
+.fcol{display:flex;flex-direction:column;gap:32px}
+.fhead{display:block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#FFFFFF;margin-bottom:8px;text-decoration:none}
+a.fhead{cursor:pointer;padding:8px 0;margin:-8px 0 0;width:fit-content;background:linear-gradient(#E8823F,#E8823F) left calc(100% - 4px)/0 1px no-repeat;transition:background-size .3s}
+a.fhead:hover,a.fhead:focus-visible{background-size:100% 1px}
 .arrow{transition:transform .3s}
 .arrow{display:inline-block}
 a:hover .arrow,button:hover .arrow,.zoom:focus-visible .arrow{transform:translateX(8px)}
@@ -78,7 +83,7 @@ a:hover .arrow,button:hover .arrow,.zoom:focus-visible .arrow{transform:translat
 .g-66{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:72px;align-items:start}
 .g-48{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:56px}
 .g-res{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
-.g-foot{display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr));gap:40px}
+.g-foot{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,4fr);gap:40px}
 .panels{display:flex;gap:12px}
 .nowrap-lg{white-space:nowrap}
 .only-sm{display:none}
@@ -100,7 +105,7 @@ a:not([href]){cursor:pointer}
   .stk{border-left:0 !important;padding-left:0 !important}
   .ci{order:-1}
   .g-res > *{grid-column:1 / -1 !important;margin-top:24px !important}
-  .g-foot{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g-foot{grid-template-columns:minmax(0,1fr);gap:56px}
   .hide-sm{display:none !important}
   .nowrap-lg{white-space:normal}
   .only-sm{display:inline-flex}
@@ -140,8 +145,8 @@ a:not([href]){cursor:pointer}
   .ext-txt{padding:0 !important}
   .ext-card .serif{font-size:26px !important}
   /* Footer: brand full width, link columns in pairs */
-  .g-foot{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:40px 24px}
-  .g-foot > :first-child{grid-column:1 / -1}
+  .g-foot{grid-template-columns:minmax(0,1fr) !important;gap:48px}
+  .g-foot-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 24px}
   footer{padding-top:72px !important}
 }
 @media (max-width:640px){
@@ -475,14 +480,11 @@ a:not([href]){cursor:pointer}
           <a tabindex="0" role="link" style="color: #FFFFFF">X</a>
         </div>
       </div>
-      <nav aria-label="What we do"><span style="display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 8px">What we do</span>
-        <a class="flink" tabindex="0" role="link">Golf</a><a class="flink" tabindex="0" role="link">Sports Venues</a><a class="flink" tabindex="0" role="link">Live Events</a><a class="flink" tabindex="0" role="link">Services</a><a class="flink" tabindex="0" role="link">Fire Pit Productions</a>
-      </nav>
-      <nav aria-label="Who we serve"><span style="display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 8px">Who we serve</span>
-        <a class="flink" tabindex="0" role="link">Cities &amp; Communities</a><a class="flink" tabindex="0" role="link">Clubs &amp; Boards</a><a class="flink" tabindex="0" role="link">Owners &amp; Investors</a><a class="flink" tabindex="0" role="link">Results</a>
-      </nav>
-      <nav aria-label="Company"><span style="display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 8px">Company</span>
-        <a class="flink" tabindex="0" role="link">About us</a><a class="flink" tabindex="0" role="link">Properties</a><a class="flink" tabindex="0" role="link">News</a><a class="flink" tabindex="0" role="link">Careers</a><a class="flink" tabindex="0" role="link">KemperClub</a>
+      <nav aria-label="Footer" class="g-foot-nav">
+        <div class="fcol"><div class="fgrp"><span class="fhead">Our Range</span><a class="flink" tabindex="0" role="link">Golf</a><a class="flink" tabindex="0" role="link">Sports Venues</a><a class="flink" tabindex="0" role="link">Live Events</a></div><div class="fgrp"><span class="fhead">Who We Serve</span><a class="flink" tabindex="0" role="link">Cities &amp; Communities</a><a class="flink" tabindex="0" role="link">Clubs &amp; Boards</a><a class="flink" tabindex="0" role="link">Owners &amp; Investors</a></div></div>
+        <div class="fcol"><div class="fgrp"><span class="fhead">What We Do</span><a class="flink" tabindex="0" role="link">Consulting &amp; Feasibility</a><a class="flink" tabindex="0" role="link">Pre-Opening &amp; Transition</a><a class="flink" tabindex="0" role="link">Management &amp; Operations</a><a class="flink" tabindex="0" role="link">Live Events &amp; Sponsorship</a><a class="flink" tabindex="0" role="link">Content &amp; Storytelling</a><a class="flink" tabindex="0" role="link">How We Operate</a></div></div>
+        <div class="fcol"><div class="fgrp"><a class="fhead flink-h" tabindex="0" role="link">Results</a><a class="flink" tabindex="0" role="link">Case Studies</a><a class="flink" tabindex="0" role="link">Outcomes &amp; Performance</a><a class="flink" tabindex="0" role="link">Client Voices</a></div><div class="fgrp"><a class="fhead flink-h" tabindex="0" role="link">Properties</a></div></div>
+        <div class="fcol"><div class="fgrp"><a class="fhead flink-h" tabindex="0" role="link">About</a><a class="flink" tabindex="0" role="link">What We Believe</a><a class="flink" tabindex="0" role="link">Our Commitment</a><a class="flink" tabindex="0" role="link">Leadership</a><a class="flink" tabindex="0" role="link">Community Impact</a><a class="flink" tabindex="0" role="link">News &amp; Perspectives</a><a class="flink" tabindex="0" role="link">Careers</a></div></div>
       </nav>
     </div>
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 72px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.14); font-size: 13px">
