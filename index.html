@@ -42,9 +42,11 @@ img,video{display:block;max-width:100%}
 .navlink{position:relative;white-space:nowrap}
 .btn{white-space:nowrap}
 .dd-chev{padding:12px 4px;margin-left:-2px}.dd-chev::after{display:none}
-.dd-panel{position:absolute;top:100%;left:-22px;min-width:248px;margin:0;padding:10px 0;list-style:none;background:#111512;border-top:2px solid #CF5D13;box-shadow:0 18px 40px rgba(0,0,0,.28)}
-.dd-link{display:block;padding:11px 22px;color:#D4D9D5;font-size:14px;line-height:1.35;text-decoration:none;white-space:nowrap;cursor:pointer;box-shadow:inset 2px 0 0 transparent;transition:color .2s,background .2s,box-shadow .2s}
-.dd-link:hover,.dd-link:focus-visible{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:inset 2px 0 0 #E8823F}
+.dd-panel{position:absolute;top:100%;left:-22px;min-width:248px;margin:0;padding:10px 0;list-style:none;background:#FAF8F4;border-top:2px solid #CF5D13;box-shadow:0 18px 40px rgba(17,21,18,.18)}
+.dd-link{display:block;padding:11px 22px;color:#1E2B22;font-size:14px;line-height:1.35;text-decoration:none;white-space:nowrap;cursor:pointer;box-shadow:inset 2px 0 0 transparent;transition:color .2s,background .2s,box-shadow .2s}
+.dd-link:hover,.dd-link:focus-visible{color:#1E2B22;background:rgba(30,43,34,.06);box-shadow:inset 2px 0 0 #CF5D13}
+.dd-panel .dd-link:focus-visible{outline-color:#1E2B22}
+.m-sub .dd-link{color:#D4D9D5}.m-sub .dd-link:hover,.m-sub .dd-link:focus-visible{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:inset 2px 0 0 #E8823F}
 .m-row{border-bottom:1px solid rgba(255,255,255,.1)}
 .m-row .navlink{font-size:16px;padding:14px 0;min-height:52px}.m-row .navlink::after{display:none}
 .m-top{width:100%;justify-content:space-between}
@@ -174,10 +176,10 @@ a:not([href]){cursor:pointer}
     <a tabindex="0" role="link" aria-label="KemperSports home" style="display: flex; align-items: center">
       <img src="assets/logo-reversed.png" alt="KemperSports" style="height: 36px; width: auto">
     </a>
-    <nav aria-label="Primary" class="hide-sm" onMouseLeave="{{ navLeave }}" style="height: 100%">
+    <nav aria-label="Primary" class="hide-sm" style="height: 100%">
       <ul style="list-style: none; margin: 0; padding: 0; height: 100%; display: flex; align-items: center; gap: clamp(14px, 1.8vw, 26px)">
         <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
-          <li class="dd" onMouseEnter="{{ n.enter }}" style="position: relative; height: 100%; display: flex; align-items: center">
+          <li class="dd" style="position: relative; height: 100%; display: flex; align-items: center">
             <sc-if value="{{ n.isMenu }}" hint-placeholder-val="{{ true }}"><button class="navlink" data-dd-btn="{{ n.i }}" aria-expanded="{{ n.exp }}" aria-controls="{{ n.id }}" onClick="{{ n.toggle }}">{{ n.label }} <svg class="dd-ico" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="transform: {{ n.rot }}; transition: transform .25s"><path d="M1 1l4 4 4-4"></path></svg></button></sc-if>
             <sc-if value="{{ n.isSplit }}" hint-placeholder-val="{{ false }}"><a class="navlink" tabindex="0" role="link">{{ n.label }}</a><button class="navlink dd-chev" data-dd-btn="{{ n.i }}" aria-label="{{ n.label }} menu" aria-expanded="{{ n.exp }}" aria-controls="{{ n.id }}" onClick="{{ n.toggle }}"><svg class="dd-ico" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="transform: {{ n.rot }}; transition: transform .25s"><path d="M1 1l4 4 4-4"></path></svg></button></sc-if>
             <sc-if value="{{ n.isLink }}" hint-placeholder-val="{{ false }}"><a class="navlink" tabindex="0" role="link">{{ n.label }}</a></sc-if>
@@ -768,13 +770,11 @@ class Component extends DCLogic {
       isMenu: n.kind === 'menu', isSplit: n.kind === 'split', isLink: n.kind === 'link', hasItems: n.items.length > 0,
       exp: dd === i ? 'true' : 'false', disp: dd === i ? 'block' : 'none', rot: dd === i ? 'rotate(180deg)' : 'none',
       mexp: mdd === i ? 'true' : 'false', mShow: mdd === i && n.items.length > 0, mrot: mdd === i ? 'rotate(180deg)' : 'none',
-      toggle: () => { clearTimeout(this.ddT); if (this.hoverOpen === i) { this.hoverOpen = -1; return; } this.setState({ dd: this.state.dd === i ? -1 : i }); },
-      enter: () => { clearTimeout(this.ddT); const t = n.items.length ? i : -1; if (this.state.dd !== t) { this.hoverOpen = t; clearTimeout(this.hoT); this.hoT = setTimeout(() => { this.hoverOpen = -1; }, 600); this.setState({ dd: t }); } },
+      toggle: () => this.setState({ dd: this.state.dd === i ? -1 : i }),
       mtoggle: () => this.setState({ mdd: this.state.mdd === i ? -1 : i }),
     }));
     return {
       v, navItems,
-      navLeave: () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => { if (this.state.dd > -1) this.setState({ dd: -1 }); }, 180); },
       ddClose: (e) => { if (e.target.closest && e.target.closest('a')) this.setState({ dd: -1 }); },
       serveX: 'translateX(' + (-this.state.serveP * 260).toFixed(3) + 'vw)',
       serveBar: (this.state.serveP * 100).toFixed(1) + '%',
