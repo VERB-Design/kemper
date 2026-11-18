@@ -39,7 +39,18 @@ img,video{display:block;max-width:100%}
 .ul:hover,.zoom:hover .ul,.zoom:focus-visible .ul{color:#B4500F}
 .ul-w{color:#FFFFFF;border-bottom-color:#E8823F}.ul-w:hover{color:#F2A06A}
 .navlink{color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;padding:12px 2px;background:none;border:0;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;min-height:44px}
-.navlink{position:relative}
+.navlink{position:relative;white-space:nowrap}
+.btn{white-space:nowrap}
+.dd-chev{padding:12px 4px;margin-left:-2px}.dd-chev::after{display:none}
+.dd-panel{position:absolute;top:100%;left:-22px;min-width:248px;margin:0;padding:10px 0;list-style:none;background:#111512;border-top:2px solid #CF5D13;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.dd-link{display:block;padding:11px 22px;color:#D4D9D5;font-size:14px;line-height:1.35;text-decoration:none;white-space:nowrap;cursor:pointer;box-shadow:inset 2px 0 0 transparent;transition:color .2s,background .2s,box-shadow .2s}
+.dd-link:hover,.dd-link:focus-visible{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:inset 2px 0 0 #E8823F}
+.m-row{border-bottom:1px solid rgba(255,255,255,.1)}
+.m-row .navlink{font-size:16px;padding:14px 0;min-height:52px}.m-row .navlink::after{display:none}
+.m-top{width:100%;justify-content:space-between}
+.m-chev{width:52px;justify-content:flex-end}
+.m-sub{list-style:none;margin:0 0 12px;padding:0}
+.m-sub .dd-link{padding:11px 16px;font-size:15px;white-space:normal}
 .navlink::after{content:'';position:absolute;left:2px;right:2px;bottom:12px;height:1px;background:#E8823F;opacity:0;transition:opacity .3s}
 .navlink:hover,.navlink:focus-visible{color:#FFFFFF}
 .navlink:hover::after,.navlink:focus-visible::after{opacity:1}
@@ -158,13 +169,21 @@ a:not([href]){cursor:pointer}
     <a tabindex="0" role="link" aria-label="KemperSports home" style="display: flex; align-items: center">
       <img src="assets/logo-reversed.png" alt="KemperSports" style="height: 36px; width: auto">
     </a>
-    <nav aria-label="Primary" class="hide-sm" style="display: flex; align-items: center; gap: 28px">
-      <a class="navlink" tabindex="0" role="link">Golf</a>
-      <a class="navlink" tabindex="0" role="link">Sports Venues</a>
-      <a class="navlink" tabindex="0" role="link">Live Events</a>
-      <a class="navlink" tabindex="0" role="link">Who We Serve</a>
-      <a class="navlink" tabindex="0" role="link">Results</a>
-      <a class="navlink" tabindex="0" role="link">About</a>
+    <nav aria-label="Primary" class="hide-sm" onMouseLeave="{{ navLeave }}" style="height: 100%">
+      <ul style="list-style: none; margin: 0; padding: 0; height: 100%; display: flex; align-items: center; gap: clamp(14px, 1.8vw, 26px)">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+          <li class="dd" onMouseEnter="{{ n.enter }}" style="position: relative; height: 100%; display: flex; align-items: center">
+            <sc-if value="{{ n.isMenu }}" hint-placeholder-val="{{ true }}"><button class="navlink" data-dd-btn="{{ n.i }}" aria-expanded="{{ n.exp }}" aria-controls="{{ n.id }}" onClick="{{ n.toggle }}">{{ n.label }} <svg class="dd-ico" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="transform: {{ n.rot }}; transition: transform .25s"><path d="M1 1l4 4 4-4"></path></svg></button></sc-if>
+            <sc-if value="{{ n.isSplit }}" hint-placeholder-val="{{ false }}"><a class="navlink" tabindex="0" role="link">{{ n.label }}</a><button class="navlink dd-chev" data-dd-btn="{{ n.i }}" aria-label="{{ n.label }} menu" aria-expanded="{{ n.exp }}" aria-controls="{{ n.id }}" onClick="{{ n.toggle }}"><svg class="dd-ico" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="transform: {{ n.rot }}; transition: transform .25s"><path d="M1 1l4 4 4-4"></path></svg></button></sc-if>
+            <sc-if value="{{ n.isLink }}" hint-placeholder-val="{{ false }}"><a class="navlink" tabindex="0" role="link">{{ n.label }}</a></sc-if>
+            <sc-if value="{{ n.hasItems }}" hint-placeholder-val="{{ true }}">
+              <ul id="{{ n.id }}" class="dd-panel" onClick="{{ ddClose }}" style="display: {{ n.disp }}">
+                <sc-for list="{{ n.items }}" as="it" hint-placeholder-count="3"><li><a class="dd-link" tabindex="0" role="link">{{ it.label }}</a></li></sc-for>
+              </ul>
+            </sc-if>
+          </li>
+        </sc-for>
+      </ul>
     </nav>
     <div style="display: flex; align-items: center; gap: 12px">
       <a class="btn btn-w hide-sm" tabindex="0" role="link" style="min-height: 44px; padding: 15px 20px; font-size: 14px"><span class="bl">Talk with our team</span></a>
@@ -176,12 +195,20 @@ a:not([href]){cursor:pointer}
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav id="mobile-menu" aria-label="Primary mobile" onClick="{{ onMenuClick }}" style="background: #111512; padding: 8px 0 24px; max-height: calc(100vh - 64px); max-height: calc(100dvh - 64px); overflow-y: auto">
       <div class="wrap" style="display: flex; flex-direction: column">
-        <a class="navlink" tabindex="0" role="link">Golf</a>
-        <a class="navlink" tabindex="0" role="link">Sports Venues</a>
-        <a class="navlink" tabindex="0" role="link">Live Events</a>
-        <a class="navlink" tabindex="0" role="link">Who We Serve</a>
-        <a class="navlink" tabindex="0" role="link">Results</a>
-        <a class="navlink" tabindex="0" role="link">About</a>
+        <ul style="list-style: none; margin: 0; padding: 0">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+            <li class="m-row">
+              <sc-if value="{{ n.isMenu }}" hint-placeholder-val="{{ true }}"><button class="navlink m-top" aria-expanded="{{ n.mexp }}" aria-controls="m-{{ n.id }}" onClick="{{ n.mtoggle }}">{{ n.label }} <svg class="dd-ico" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="transform: {{ n.mrot }}; transition: transform .25s"><path d="M1 1l4 4 4-4"></path></svg></button></sc-if>
+              <sc-if value="{{ n.isSplit }}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; justify-content: space-between"><a class="navlink" tabindex="0" role="link">{{ n.label }}</a><button class="navlink m-chev" aria-label="{{ n.label }} menu" aria-expanded="{{ n.mexp }}" aria-controls="m-{{ n.id }}" onClick="{{ n.mtoggle }}"><svg class="dd-ico" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="transform: {{ n.mrot }}; transition: transform .25s"><path d="M1 1l4 4 4-4"></path></svg></button></div></sc-if>
+              <sc-if value="{{ n.isLink }}" hint-placeholder-val="{{ false }}"><a class="navlink" tabindex="0" role="link">{{ n.label }}</a></sc-if>
+              <sc-if value="{{ n.mShow }}" hint-placeholder-val="{{ false }}">
+                <ul id="m-{{ n.id }}" class="m-sub">
+                  <sc-for list="{{ n.items }}" as="it" hint-placeholder-count="3"><li><a class="dd-link" tabindex="0" role="link">{{ it.label }}</a></li></sc-for>
+                </ul>
+              </sc-if>
+            </li>
+          </sc-for>
+        </ul>
         <a class="btn btn-w" tabindex="0" role="link" style="margin-top: 16px; align-self: flex-start"><span class="bl">Talk with our team</span></a>
       </div>
     </nav>
@@ -517,7 +544,7 @@ a:not([href]){cursor:pointer}
 
 <script type="text/x-dc" data-dc-script data-props='{"heroMedia":{"editor":"enum","options":["video","photo"],"default":"video","section":"Hero"},"heroVideoUrl":{"editor":"text","default":"","section":"Hero"},"motion":{"editor":"boolean","default":true,"section":"Motion"},"tweaksPanel":{"editor":"boolean","default":true,"section":"Review"},"$preview":{"width":1440,"height":11000}}'>
 class Component extends DCLogic {
-  state = { heroPaused: false, twOpen: false, twHero: null, tw: {}, twMotion: null, scrolled: false, menuOpen: false, doActive: 0, serveActive: 0, pIdx: 0, pV: 5, pAnim: true, serveP: 0, doP: 0 };
+  state = { heroPaused: false, twOpen: false, twHero: null, tw: {}, twMotion: null, scrolled: false, menuOpen: false, dd: -1, mdd: -1, doActive: 0, serveActive: 0, pIdx: 0, pV: 5, pAnim: true, serveP: 0, doP: 0 };
   SECTIONS = [];
   B(id) { return id; }
 
@@ -553,13 +580,17 @@ class Component extends DCLogic {
     document.addEventListener('click', this.noNav, true);
     // Escape closes the mobile menu and returns focus to its button
     this.onKey = (e) => {
+      if (e.key === 'Escape' && this.state.dd > -1) { const b = document.querySelector('[data-dd-btn="' + this.state.dd + '"]'); this.setState({ dd: -1 }); if (b) b.focus(); return; }
       if (e.key === 'Escape' && this.state.menuOpen) { this.setState({ menuOpen: false }); const b = document.querySelector('[data-menu-btn]'); if (b) b.focus(); }
     };
     document.addEventListener('keydown', this.onKey);
+    this.ddOut = (e) => { if (this.state.dd > -1 && !(e.target.closest && e.target.closest('.dd'))) this.setState({ dd: -1 }); };
+    document.addEventListener('click', this.ddOut);
     // Pinned sections: when focus lands on an off-screen chapter / stage, scroll the page to the matching progress
     // (the browser otherwise scrolls the overflow:hidden pin sideways and the focused control is out of view or the stage stays collapsed).
     this.onFocusIn = (e) => {
       const t = e.target; if (!t || !t.closest) return;
+      if (this.state.dd > -1) { const o = t.closest('.dd'); if (!o || !o.querySelector('[data-dd-btn="' + this.state.dd + '"]')) this.setState({ dd: -1 }); }
       const ch = t.closest('.serve-ch'), li = t.closest('#services ol > li');
       requestAnimationFrame(() => {
         const vh = window.innerHeight;
@@ -593,7 +624,7 @@ class Component extends DCLogic {
     }, { threshold: 0.15 });
     this.scan();
   }
-  componentWillUnmount() { document.removeEventListener('click', this.noNav, true); document.removeEventListener('keydown', this.onKey); document.removeEventListener('focusin', this.onFocusIn); clearTimeout(this.pT); if (this.io) this.io.disconnect(); window.removeEventListener('scroll', this.onScroll); }
+  componentWillUnmount() { document.removeEventListener('click', this.noNav, true); document.removeEventListener('click', this.ddOut); clearTimeout(this.ddT); document.removeEventListener('keydown', this.onKey); document.removeEventListener('focusin', this.onFocusIn); clearTimeout(this.pT); if (this.io) this.io.disconnect(); window.removeEventListener('scroll', this.onScroll); }
   componentDidUpdate(prev, prevState) {
     const ps = prevState || {};
     const pMotion = ps.twMotion ?? (prev.motion !== false);
@@ -721,8 +752,28 @@ class Component extends DCLogic {
     const vid = this.heroVal() === 'video';
     const on = (b) => ({ bg: b ? '#E8823F' : 'transparent', fg: b ? '#111512' : '#FFFFFF', p: b ? 'true' : 'false' });
     const vB = on(vid), pB = on(!vid);
+    const NAV = [
+      { label: 'Our Range', kind: 'menu', items: ['Golf', 'Sports Venues', 'Live Events'] },
+      { label: 'Who We Serve', kind: 'menu', items: ['Cities & Communities', 'Clubs & Boards', 'Owners & Investors'] },
+      { label: 'What We Do', kind: 'menu', items: ['Consulting & Feasibility', 'Pre-Opening & Transition', 'Management & Operations', 'Live Events & Sponsorship', 'Content & Storytelling', 'How We Operate'] },
+      { label: 'Results', kind: 'split', items: ['Case Studies', 'Outcomes & Performance', 'Client Voices'] },
+      { label: 'Properties', kind: 'link', items: [] },
+      { label: 'About', kind: 'split', items: ['What We Believe', 'Our Commitment', 'Leadership', 'Community Impact', 'News & Perspectives', 'Careers'] },
+    ];
+    const dd = this.state.dd, mdd = this.state.mdd;
+    const navItems = NAV.map((n, i) => ({
+      i, label: n.label, id: 'dd-' + i, items: n.items.map((label) => ({ label })),
+      isMenu: n.kind === 'menu', isSplit: n.kind === 'split', isLink: n.kind === 'link', hasItems: n.items.length > 0,
+      exp: dd === i ? 'true' : 'false', disp: dd === i ? 'block' : 'none', rot: dd === i ? 'rotate(180deg)' : 'none',
+      mexp: mdd === i ? 'true' : 'false', mShow: mdd === i && n.items.length > 0, mrot: mdd === i ? 'rotate(180deg)' : 'none',
+      toggle: () => { clearTimeout(this.ddT); if (this.hoverOpen === i) { this.hoverOpen = -1; return; } this.setState({ dd: this.state.dd === i ? -1 : i }); },
+      enter: () => { clearTimeout(this.ddT); const t = n.items.length ? i : -1; if (this.state.dd !== t) { this.hoverOpen = t; clearTimeout(this.hoT); this.hoT = setTimeout(() => { this.hoverOpen = -1; }, 600); this.setState({ dd: t }); } },
+      mtoggle: () => this.setState({ mdd: this.state.mdd === i ? -1 : i }),
+    }));
     return {
-      v,
+      v, navItems,
+      navLeave: () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => { if (this.state.dd > -1) this.setState({ dd: -1 }); }, 180); },
+      ddClose: (e) => { if (e.target.closest && e.target.closest('a')) this.setState({ dd: -1 }); },
       serveX: 'translateX(' + (-this.state.serveP * 260).toFixed(3) + 'vw)',
       serveBar: (this.state.serveP * 100).toFixed(1) + '%',
       serveNum: '0' + Math.min(3, Math.max(1, Math.round(this.state.serveP * 3) || 1)),
