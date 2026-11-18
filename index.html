@@ -124,7 +124,8 @@ a:not([href]){cursor:pointer}
   .sec-pad{padding-top:80px !important;padding-bottom:80px !important}
   .proof-l{padding-right:0 !important;gap:40px !important}
   .proof-l > *{margin-top:0 !important}
-  #range{padding:0 20px !important;margin-top:72px !important;gap:56px !important}
+  #range{padding:0 20px !important;margin-top:32px !important;gap:56px !important}
+  #range-h{padding:0 20px !important;margin-top:72px !important}
   /* Who we serve: unpin the sideways scroll and stack the chapters */
   .serve{height:auto !important}
   .serve-pin{position:static !important;height:auto !important;min-height:0 !important;overflow:visible !important}
@@ -282,7 +283,8 @@ a:not([href]){cursor:pointer}
       </div>
 
   </div>
-  <div id="range" class="g-3" role="group" aria-label="Golf, sports venues and live events" style="gap: 24px; padding: 0 48px; margin-top: 112px; scroll-margin-top: 96px">
+  <h2 id="range-h" class="h2" data-animate="reveal" style="padding: 0 48px; margin-top: 112px">One Company. Expertise for Every Place.</h2>
+  <div id="range" class="g-3" role="group" aria-labelledby="range-h" style="gap: 24px; padding: 0 48px; margin-top: 48px; scroll-margin-top: 96px">
     <sc-for list="{{ rangeAll }}" as="r" hint-placeholder-count="3">
       <a class="zoom" tabindex="0" role="link" data-animate="reveal" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: #1E2B22">
         <div class="ph" style="aspect-ratio: 1 / 1; margin-bottom: 10px"><img src="{{ r.img }}" alt="{{ r.alt }}" style="width: 100%; height: 100%; object-fit: cover"></div>
