@@ -230,16 +230,17 @@ a:not([href]){cursor:pointer}
 
   <!-- Hero 1 · Bottom-left statement -->
   
-    <div style="position: relative; height: calc(110 * var(--vh)); min-height: 720px; background: #111512; color: #FFFFFF; overflow: hidden; display: flex; align-items: flex-end">
+    <div style="position: relative; height: 110vh; height: 110svh; min-height: 720px; background: #111512; color: #FFFFFF; overflow: hidden; display: flex; align-items: flex-end">
       <sc-if value="{{ heroVideo }}" hint-placeholder-val="{{ true }}"><video src="{{ heroSrc }}" poster="assets/hero-poster.jpg" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video></sc-if>
       <sc-if value="{{ heroPhoto }}" hint-placeholder-val="{{ false }}"><img src="assets/hero-poster.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if>
       <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17,21,18,0.7) 0%, rgba(17,21,18,0.4) 12%, rgba(17,21,18,0) 25%, rgba(17,21,18,0) 40%, rgba(17,21,18,0.85) 100%)"></div>
-      <sc-if value="{{ heroVideo }}" hint-placeholder-val="{{ true }}"><button onClick="{{ toggleHero }}" aria-label="{{ heroLabel }}" style="position: absolute; z-index: 2; right: max(20px, calc(5 * var(--vh))); top: calc(100 * var(--vh) - 124px); width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.6); background: rgba(17,21,18,0.55); color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0">
+      <sc-if value="{{ heroVideo }}" hint-placeholder-val="{{ true }}"><button onClick="{{ toggleHero }}" aria-label="{{ heroLabel }}" style="position: absolute; z-index: 2; right: max(20px, calc(5 * var(--vh))); top: calc(100svh - 124px); width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.6); background: rgba(17,21,18,0.55); color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0">
         <sc-if value="{{ heroPaused }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"></path></svg></sc-if>
         <sc-if value="{{ heroPlaying }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.5 2h3.2v12H3.5zM9.3 2h3.2v12H9.3z"></path></svg></sc-if>
       </button></sc-if>
       <div class="wrap" style="position: relative; width: 100%; padding-bottom: calc(20 * var(--vh)); display: flex; flex-direction: column; gap: 28px">
         <h1 class="serif" data-animate="reveal" style="margin: 0; font-size: clamp(32px, 4.4vw, 48px); line-height: 0.98; max-width: 1080px">Entrusted with the places people love.</h1>
+        <p class="hero-sub" data-animate="reveal" style="margin: -8px 0 0; font-size: clamp(17px, 1.35vw, 20px); line-height: 1.55; color: #E8ECE9; max-width: 720px">We manage golf courses, private clubs, resorts and sports venues<br class="hide-sm"> to a hospitality standard people can feel and owners can measure.</p>
         <div data-animate="reveal" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
           <a class="btn btn-w" tabindex="0" role="link"><span class="bl">Explore our properties</span></a>
           <a class="btn btn-gw" tabindex="0" role="link"><span class="bl">See our results</span></a>
@@ -258,10 +259,9 @@ a:not([href]){cursor:pointer}
     <!-- Proof 1 · Editorial split -->
     
       <div class="g-75" style="gap: 0; row-gap: 56px">
-        <div class="proof-l" style="display: flex; flex-direction: column; gap: 48px; padding-right: 72px">
+        <div class="proof-l" style="display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding-right: 72px">
           <h2 id="proof-h" class="h2" data-animate="reveal" style="max-width: 640px">Year after year,<br>owners choose us again.</h2>
-          <p class="bd" data-animate="reveal" style="margin-top: -24px; max-width: 640px">We manage golf courses, private clubs, resorts and sports venues<br class="hide-sm"> to a hospitality standard people can feel and owners can measure.</p>
-          <div data-animate="reveal" style="display: flex; flex-direction: column; gap: 10px; margin-top: -24px">
+          <div data-animate="reveal" style="display: flex; flex-direction: column; gap: 10px">
             <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px">
               <div style="display: flex; align-items: baseline; gap: 8px"><span class="num" style="font-size: clamp(77px, 8vw, 134px); line-height: 0.9">94</span><span class="num unit" style="font-size: clamp(48px, 4.6vw, 76px)">%</span></div>
               <div style="display: flex; flex-direction: column; gap: 6px; padding-bottom: 14px">
@@ -270,7 +270,7 @@ a:not([href]){cursor:pointer}
               </div>
             </div>
           </div>
-          <a class="ul" tabindex="0" role="link" style="margin-top: -24px">View Case Studies<svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></a>
+          <a class="ul" tabindex="0" role="link" style="align-self: flex-start">View Case Studies<svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></a>
         </div>
         <dl class="stk" style="margin: 0; border-left: 1px solid rgba(30,43,34,0.14); padding-left: 64px; display: flex; flex-direction: column; justify-content: space-between">
           <sc-for list="{{ proofStats }}" as="p" hint-placeholder-count="3">
