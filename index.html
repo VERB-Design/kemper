@@ -66,18 +66,18 @@ img,video{display:block;max-width:100%}
 .mega-link svg{color:#CF5D13;flex:none}
 .mega-link:hover,.mega-link:focus-visible{background:rgba(30,43,34,.05);color:#B4500F}
 .mega :focus-visible{outline-color:#1E2B22 !important}
-.res-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:stretch}
+.res-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:64px;align-items:stretch}
 .res-ph{position:relative;min-height:440px;overflow:hidden;background:#DCD5C6}
 .res-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s ease}
 .res-view{overflow:hidden;display:flex}
 .res-track{display:grid;width:100%}
 .res-card{grid-area:1/1;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:8px 0}
 .res-kind{margin:0;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#B4500F}
-.res-metric{margin:0;display:flex;flex-direction:column;gap:6px}
+.res-metric{margin:0;display:flex;align-items:center;gap:20px}
 .res-num{font-size:clamp(56px,6vw,96px);line-height:.95}
 .res-num .unit{color:#CF5D13;font-size:.6em;margin-left:4px}
-.res-out{font-size:18px;font-weight:600;color:#1E2B22}
-.res-quote{margin:0;padding-left:24px;border-left:2px solid #CF5D13}
+.res-out{font-size:18px;line-height:1.4;font-weight:600;color:#1E2B22}
+.res-quote{margin:24px 0;padding-left:24px;border-left:2px solid #CF5D13}
 .res-quote p{margin:0;font-family:'Libre Baskerville',Georgia,serif;font-size:clamp(19px,1.6vw,24px);line-height:1.5;color:#2C4833}
 .res-attr{margin:0;font-size:15px;line-height:1.5;color:#3D4A41}
 .res-attr b{color:#1E2B22;font-weight:600}
@@ -150,7 +150,7 @@ a:not([href]){cursor:pointer}
   .panels{flex-direction:column;height:auto !important}
   .panels > *{flex:none !important}
   /* Chapter text runs wide here, so the scrim goes vertical (measured 2026-11-16) */
-  .serve-ch > span[aria-hidden]{background:linear-gradient(180deg,rgba(17,21,18,0.1) 0%,rgba(17,21,18,0.68) 40%,rgba(17,21,18,0.92) 100%) !important}
+  .serve-ch > span[aria-hidden]{background:linear-gradient(0deg,rgba(17,21,18,0.92) 0%,rgba(17,21,18,0.75) 30%,rgba(17,21,18,0) 50%) !important}
 }
 @media (max-width:760px){
   /* Mobile pass, 2026-11-16 */
@@ -177,7 +177,7 @@ a:not([href]){cursor:pointer}
   .op-ctas{gap:12px !important}
   .res-grid{grid-template-columns:minmax(0,1fr) !important;gap:32px !important}
   .res-ph{min-height:0 !important;aspect-ratio:4/3}
-  #results{padding:80px 0 !important}
+  #results{padding:0 0 80px !important}
   /* Extend the experience: image above text */
   .ext{padding:24px 20px 88px !important}
   .ext .g-2{gap:56px !important}
@@ -349,7 +349,7 @@ a:not([href]){cursor:pointer}
 </section>
 
 <!-- ============ 3b · RESULTS (carousel) ============ -->
-<section id="results" class="sec-pad res" aria-labelledby="res-h" style="background: #FAF8F4; padding: 120px 0">
+<section id="results" class="res" aria-labelledby="res-h" style="background: #FFFFFF; padding: 0 0 120px">
   <div class="wrap">
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 48px">
       <h2 id="res-h" class="h2" data-animate="reveal">Results you can count on.</h2>
@@ -367,8 +367,7 @@ a:not([href]){cursor:pointer}
         <div id="res-track" class="res-track">
           <sc-for list="{{ results }}" as="r" hint-placeholder-count="3">
             <article class="res-card" role="group" aria-roledescription="slide" aria-label="{{ r.label }}" style="opacity: {{ r.imgOp }}; visibility: {{ r.vis }}; transition: {{ rTrans }}">
-              <p class="res-kind">{{ r.kind }}</p>
-              <p class="res-metric"><span class="num res-num">{{ r.num }}<span class="unit">{{ r.unit }}</span></span><span class="res-out">{{ r.outcome }} · {{ r.period }}</span></p>
+              <p class="res-metric"><span class="num res-num">{{ r.num }}<span class="unit">{{ r.unit }}</span></span><span class="res-out">{{ r.outcome }}<br>{{ r.period }}</span></p>
               <blockquote class="res-quote"><p>“{{ r.quote }}”</p></blockquote>
               <p class="res-attr"><b>{{ r.title }}</b>, {{ r.org }} · Since {{ r.since }}</p>
               <a class="ul" tabindex="0" role="link" style="align-self: flex-start">Read the story <span class="arrow" aria-hidden="true">→</span></a>
@@ -393,14 +392,13 @@ a:not([href]){cursor:pointer}
       <sc-for list="{{ chapters }}" as="c" hint-placeholder-count="3">
         <article class="serve-ch" style="flex: 0 0 100vw; width: 100vw; height: 100%; position: relative; overflow: hidden; color: #FFFFFF; display: flex; align-items: flex-end">
           <img class="serve-img" src="{{ c.img }}" alt="{{ c.alt }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: {{ c.scale }}">
-          <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(17,21,18,0.92) 0%, rgba(17,21,18,0.82) 30%, rgba(17,21,18,0.45) 55%, rgba(17,21,18,0) 80%)"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(17,21,18,0.9) 0%, rgba(17,21,18,0.72) 25%, rgba(17,21,18,0) 50%)"></span>
           <div class="wrap" style="position: relative; width: 100%; padding-bottom: calc(12 * var(--vh)); display: flex; flex-direction: column; gap: 22px">
             <p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #F2C3A0">{{ c.name }}</p>
             <h3 class="serif" style="margin: 0; font-size: clamp(22px, 2vw, 30px); line-height: 1.2; max-width: 680px; font-weight: 400">{{ c.pressure }}</h3>
             <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #E8ECE9; max-width: 560px">{{ c.response }}</p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 40px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.25)">
-              <p style="margin: 0; font-size: 15px; color: #D4D9D5; max-width: 620px"><b style="color: #FFFFFF">Proof</b> · {{ c.proof }}</p>
-              <a class="btn btn-w" tabindex="0" role="link" style="align-self: center"><span class="bl">{{ c.cta }}</span><span class="arrow" aria-hidden="true">→</span></a>
+            <div style="display: flex; padding-top: 8px">
+              <a class="btn btn-w" tabindex="0" role="link"><span class="bl">{{ c.cta }}</span><span class="arrow" aria-hidden="true">→</span></a>
             </div>
           </div>
         </article>
