@@ -67,7 +67,7 @@ img,video{display:block;max-width:100%}
 .mega-link{display:flex;align-items:center;gap:4px;padding:10px 0;min-height:39px;box-sizing:border-box;font-size:16px;font-weight:600;color:#1E2B22;text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
 .mega-link:hover,.mega-link:focus-visible{color:#B4500F}
 .mega :focus-visible{outline-color:#1E2B22 !important}
-#results{--rw:min(1100px,78vw);--rg:48px}
+#results{--rw:min(1100px,78vw);--rg:144px}
 .res-vp-head{width:var(--rw);margin:0 auto}
 .res-vp{overflow:hidden;outline:none}
 .res-track{display:flex;gap:var(--rg);will-change:transform}
@@ -177,7 +177,7 @@ a:not([href]){cursor:pointer}
   .do-stick{padding:32px 20px !important}
   .do-stick .g-66 > div{padding-right:0 !important}
   .op-ctas{gap:12px !important}
-  #results{--rw:calc(100vw - 56px) !important;--rg:16px !important}
+  #results{--rw:calc(100vw - 56px) !important;--rg:48px !important}
   .res-slide{grid-template-columns:minmax(0,1fr) !important;gap:28px !important}
   .res-ph{min-height:0 !important;aspect-ratio:4/3}
   #results{padding:0 0 80px !important}
@@ -821,7 +821,7 @@ class Component extends DCLogic {
     const rN = RES.length || 1, rV = this.state.rV || rN, rIdx = ((rV % rN) + rN) % rN;
     const resLoop = [0, 1, 2].flatMap((k) => RES.map((r, i) => {
       const v = k * rN + i, a = v === rV, near = Math.abs(v - rV) === 1;
-      return { ...r, op: a ? 1 : 0.5, hid: a ? 'false' : 'true', tab: a ? '0' : '-1', cur: a ? 'default' : 'pointer', label: (i + 1) + ' of ' + rN, go: () => { if (!a && near) this.goR(v); } };
+      return { ...r, op: a ? 1 : 0.3, hid: a ? 'false' : 'true', tab: a ? '0' : '-1', cur: a ? 'default' : 'pointer', label: (i + 1) + ' of ' + rN, go: () => { if (!a && near) this.goR(v); } };
     }));
     const rGo = (d) => this.goR((this.state.rV || rN) + d);
     const NAV = [

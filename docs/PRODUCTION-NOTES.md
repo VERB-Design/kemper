@@ -140,3 +140,4 @@ Earlier contents of this folder (Lorax name-submission form, Apps Script, setup 
   - The loop renders the slide set three times and snaps back to the middle copy after each 0.7s move, the same pattern as the property carousel.
   - Inactive slides are `aria-hidden` and their links are `tabindex="-1"`. Under reduced motion the move and fade are instant.
   - Verified at 1440 and 390: next, previous, wrap past either end, active slide centred, no sideways page scroll.
+- 2026-11-19: results carousel gap tripled (48 to 144px desktop, 16 to 48px mobile), and neighbouring slides are now at 30% opacity. At 1440 this leaves only about 26px of each neighbour showing at the screen edge; more shows on wider screens.
