@@ -324,7 +324,7 @@ a:not([href]){cursor:pointer}
           </div>
           <a class="ul" tabindex="0" role="link" style="align-self: flex-start">View Case Studies<svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></a>
         </div>
-        <dl class="stk" style="margin: 0; border-left: 1px solid rgba(30,43,34,0.14); padding-left: 64px; display: flex; flex-direction: column; justify-content: space-between">
+        <dl class="stk" style="margin: 0; border-left: 1px solid rgba(30,43,34,0.14); padding-left: 64px; display: flex; flex-direction: column; justify-content: flex-start">
           <sc-for list="{{ proofStats }}" as="p" hint-placeholder-count="3">
             <div data-animate="reveal" style="display: flex; flex-direction: column-reverse; gap: 6px; padding: {{ p.pad }}; border-bottom: {{ p.rule }}">
               <dt style="font-size: 16px; line-height: 1.4; color: #3D4A41">{{ p.desc }}<sup style="font-size: 11px; color: #5C6760; margin-left: 3px">{{ p.sup }}</sup></dt>
@@ -752,7 +752,7 @@ class Component extends DCLogic {
       { a: '$3B', u: '+', b: '', desc: 'in owner assets under our care', sup: '2', uSize: '1em', uMargin: '0' },
       { a: '11', u: 'of', b: '25', desc: 'Golfweek Top 25 public courses · 2025', sup: '3', uSize: '0.55em', uMargin: '0 0.2em' },
       { a: '215', u: '+', b: '', desc: 'properties in 40+ states, since 1978', sup: '', uSize: '1em', uMargin: '0' }
-    ].map((p, i, arr) => ({ ...p, pad: i === 0 ? '0 0 20px' : i === arr.length - 1 ? '20px 0 0' : '20px 0', rule: i === arr.length - 1 ? '0' : '1px solid rgba(30,43,34,0.12)', colRule: i === 0 ? '0' : '1px solid rgba(30,43,34,0.14)', uColor: p.u === 'of' ? '#B4500F' : '#CF5D13' }));
+    ].map((p, i, arr) => ({ ...p, pad: ['0 0 30px', '34px 0', '34px 0 0'][i] /* optically centred on the rules: 36px of clear space from ink to rule on both sides; re-measure if the stat copy changes */, rule: i === arr.length - 1 ? '0' : '1px solid rgba(30,43,34,0.12)', colRule: i === 0 ? '0' : '1px solid rgba(30,43,34,0.14)', uColor: p.u === 'of' ? '#B4500F' : '#CF5D13' }));
 
     const rangeAll = [
       { name: 'Golf', line: 'Public, municipal and daily-fee courses. Private clubs. Destination resorts.', body: 'We bring decades of golf operating experience to strengthen performance without losing what makes each place matter.', short: 'Public and municipal courses, private clubs and destination resorts, run to a hospitality standard.', cta: 'Explore Golf', href: '#', img: B('assets/range-golf.jpg'), alt: 'Aerial view of a golf hole winding past a pond', detail: B('assets/range-golf-detail.jpg'), detailAlt: 'Golfer mid-swing on a fairway', band: '520px', bandSize: '56px' },

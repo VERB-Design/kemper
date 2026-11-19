@@ -130,3 +130,4 @@ Earlier contents of this folder (Lorax name-submission form, Apps Script, setup 
   - Images on cards 2 and 4 (serve-clubs, serve-cities) are stand-ins, not confirmed photos of those properties.
   - Recommendation: ask KemperSports for approved results-led client testimonials and replace these pairings.
   - Backup options not used: Modesto (2025 record net income, from city minutes, needs manual check), The Governors Club, Chambers Bay, Sand Creek Station.
+- 2026-11-19: proof stat dividers optically centred. The list no longer uses `justify-content: space-between` (which put the spare height below each rule), and paddings are set per item (30 / 34+34 / 34) so there is 36px of clear space from text ink to each rule on both sides. Pixel-measured at 1440 (36/36, 36/36) and 1024 (36/36, 35/36). These values depend on the current stat copy (descenders in "Golfweek … public"), so re-measure if it changes.
