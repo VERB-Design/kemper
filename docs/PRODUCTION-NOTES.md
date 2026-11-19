@@ -112,3 +112,21 @@ Earlier contents of this folder (Lorax name-submission form, Apps Script, setup 
   - **Accessibility:** the line sits on the hero's bottom scrim (0.85 at the bottom edge) over moving video. It's not measured; the worst-frame check from 2026-11-16 covered the H1 and nav only.
 - 2026-11-19: hero is now a true `110vh` (`110svh` where supported), still min 720px. It was `calc(110 * var(--vh))`, which capped at 1056px on tall screens. The pause button now sits at `100svh - 124px`, so it stays inside the first screen.
 - 2026-11-19: proof intro rebalanced after the line moved out. The left column now spreads across the height of the stat list (`justify-content: space-between`, 40px minimum gaps, the -24px pulls removed). The H2 lines up with "$3B+", and "View Case Studies" lines up with the last stat.
+- 2026-11-19: **Mega-menu** built from Figma node 3691:48007 ("Megamenu-what-we-do", file KemperSports (2026)), in cream (#FAF8F4) instead of the Figma green. It's a full-width panel under the header:
+  - Header row: serif section title, an "Overview" link for Results and About only (per the IA; the Figma frame shows Overview on What We Do too), and a close ×.
+  - Body: image cards for the first items (3:2, cover fill, scale 1), plus a chevron link list with hairlines for the rest. Menus with 3 items show 3 cards; What We Do and About show 2 cards and 4 links.
+  - The header goes solid while a menu is open. Click to open and close; it also closes on outside click, Escape and the × button, and focus returns to the trigger.
+  - The mobile accordion keeps its simple list, now with an "Overview" first item for Results and About; the old "Results Overview" and "About Overview" desktop items are gone.
+  - Card imagery reuses page assets as stand-ins. The `isSplit` dead code is removed.
+  - Pre-change copy at `/private/tmp/…/scratchpad/index.before-mega.html`.
+- 2026-11-19: **Tweaks panel removed** (markup between TWEAKS:START/END). The `tw` state and `tw*` render values in the logic are now dead code.
+- 2026-11-19: **Results section** added after the range cards: "Results you can count on." (Troy wrote "Result you can count on"; pluralised to match the section name; confirm). Image left (crossfades per slide), a carousel of result cards right, prev/next and counter top right, arrow keys work. Slides crossfade instead of sliding, and hidden slides use `visibility: hidden` so their links leave the tab order. Stacks image-over-card at 760px and below.
+  - **Content accuracy, needs client approval before anything goes out.** Metrics come from KemperSports' own case studies (kempersports.com/results, 2022, self-reported). The quotes come from separate **selection or renewal announcements**, not from results, so every card pairs a results number with an older quote about choosing KemperSports:
+    1. Galloping Hill GC, 300%+ total revenue growth 2009–2021. Quote: Alexander Mirabella, Union County Freeholder Chairman, 2009 (thegolfwire.com).
+    2. Village Club of Sands Point, 250% golf membership growth over four years. Quote: Mayor Edward Adler, 2017 (kempersports.com). The quote is truncated in the source and ends with an ellipsis; pull the full sentence.
+    3. Streamsong Resort, 10% average room rate gain 2021 vs 2019. Quote: Ben Pratt, The Mosaic Company, Jan 2021 (firstcallgolf.com). **Risk:** KemperSports bought Streamsong from Mosaic in Jan 2023, so Mosaic is a former owner-client.
+    4. Forest Creek GC, 58% rounds growth FY2019–FY2021. Quote: Mayor Alan McGraw, City of Round Rock, Dec 2016 (roundrocktexas.gov).
+    5. Desert Willow, 99th percentile in the NGF customer survey, 2021. Quote: Mayor Jan Harnik, Palm Desert, Aug 2022 (renewal release, firstcallgolf.com). The quote praises the asset, not KemperSports directly.
+  - Images on cards 2 and 4 (serve-clubs, serve-cities) are stand-ins, not confirmed photos of those properties.
+  - Recommendation: ask KemperSports for approved results-led client testimonials and replace these pairings.
+  - Backup options not used: Modesto (2025 record net income, from city minutes, needs manual check), The Governors Club, Chambers Bay, Sand Creek Station.
