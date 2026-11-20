@@ -194,11 +194,13 @@ a:not([href]){cursor:pointer}
   .car-count{order:3;margin-left:auto}
   #results{--rw:calc(100vw - 56px) !important;--rg:16px !important;padding:0 0 64px !important}
   .res-head{margin-bottom:38px !important;gap:19px !important}
-  .res-slide{grid-template-columns:minmax(0,1fr) !important;gap:22px !important}
+  .res-slide{grid-template-columns:minmax(0,1fr) !important;gap:22px !important;align-content:start}
   .res-ph{min-height:0 !important;aspect-ratio:4/3}
   .res-card{gap:18px;padding:6px 0}
-  .res-metric{gap:14px}
-  .res-out{font-size:15px;white-space:nowrap}
+  /* Number and two-line outcome scale together so the longest outcome fits at 320–390px */
+  .res-metric{gap:min(14px,3.6vw)}
+  .res-num{font-size:min(42px,10.5vw)}
+  .res-out{font-size:min(15px,3.7vw);white-space:nowrap}
   .res-quote{margin:19px 0;padding-left:19px}
   .res-btn,.prop-btn{width:42px !important;height:42px !important}
   #properties{--pw:calc(100vw - 56px);--pg:16px;--po:8px;padding:64px 0 !important}
