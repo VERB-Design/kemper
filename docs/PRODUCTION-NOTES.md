@@ -142,3 +142,8 @@ Earlier contents of this folder (Lorax name-submission form, Apps Script, setup 
   - Verified at 1440 and 390: next, previous, wrap past either end, active slide centred, no sideways page scroll.
 - 2026-11-19: results carousel gap tripled (48 to 144px desktop, 16 to 48px mobile), and neighbouring slides are now at 30% opacity. At 1440 this leaves only about 26px of each neighbour showing at the screen edge; more shows on wider screens.
 - 2026-11-19: results card number 25% smaller: `clamp(42px, 4.5vw, 72px)`, was `clamp(56px, 6vw, 96px)`. That is 64.8px at 1440 and 42px at 390.
+
+### 2026-11-20 · Chapter panels 75vw; Extend spacing equalised
+- **Everyone loves their place:** each chapter panel is 75vw (was 100vw), so the next panel peeks in from the right. Sideways travel retuned from 260vw to 185vw so the last panel lands flush right. The counter's numbering and colour switch were retuned to match (white once the intro has cleared, at p≥0.33), and keyboard focus-scroll now divides by 1.85vw. Panels butt edge to edge with no gutter. Mobile is unchanged (stacked, full width).
+- **Extend (LIVE / Fire Pit):** the space from the section above to the keyline, from the keyline to the cards, and from the cards to the green band is now equal: 80px on desktop, 56px on mobile. Measured.
+- *Warning:* for about 20px of scroll, the "01 / 03" counter straddles the edge where the cream intro meets the first image. Its colour can't match both grounds at once. Acceptable as a transition; flag it if it reads as a glitch.

@@ -182,7 +182,8 @@ a:not([href]){cursor:pointer}
   .res-ph{min-height:0 !important;aspect-ratio:4/3}
   #results{padding:0 0 80px !important}
   /* Extend the experience: image above text */
-  .ext{padding:24px 20px 88px !important}
+  .ext{padding:56px 20px 56px !important}
+  .ext-rule{padding-top:56px !important}
   .ext .g-2{gap:56px !important}
   .ext-card{grid-template-columns:minmax(0,1fr) !important;gap:20px !important}
   .ext-card .ph{aspect-ratio:16 / 10 !important}
@@ -391,7 +392,7 @@ a:not([href]){cursor:pointer}
         </div>
       </div>
       <sc-for list="{{ chapters }}" as="c" hint-placeholder-count="3">
-        <article class="serve-ch" style="flex: 0 0 100vw; width: 100vw; height: 100%; position: relative; overflow: hidden; color: #FFFFFF; display: flex; align-items: flex-end">
+        <article class="serve-ch" style="flex: 0 0 75vw; width: 75vw; height: 100%; position: relative; overflow: hidden; color: #FFFFFF; display: flex; align-items: flex-end">
           <img class="serve-img" src="{{ c.img }}" alt="{{ c.alt }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: {{ c.scale }}">
           <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(17,21,18,0.9) 0%, rgba(17,21,18,0.72) 25%, rgba(17,21,18,0) 50%)"></span>
           <div class="wrap" style="position: relative; width: 100%; padding-bottom: calc(12 * var(--vh)); display: flex; flex-direction: column; gap: 22px">
@@ -451,8 +452,8 @@ a:not([href]){cursor:pointer}
     </div>
   </div>
 
-  <div class="ext" style="padding: 48px calc(5 * var(--vh)) 120px">
-    <div style="padding-top: 40px; border-top: 1px solid rgba(30,43,34,0.16)">
+  <div class="ext" style="padding: 80px calc(5 * var(--vh)) 80px">
+    <div class="ext-rule" style="padding-top: 80px; border-top: 1px solid rgba(30,43,34,0.16)">
       <div class="g-2" style="gap: calc(5 * var(--vh)); align-items: start">
         <sc-for list="{{ extend }}" as="e" hint-placeholder-count="2">
           <a class="zoom ext-card" tabindex="0" role="link" style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 28px; align-items: stretch; text-decoration: none; color: #1E2B22">
@@ -650,7 +651,7 @@ class Component extends DCLogic {
         if (ch) {
           const pin = ch.closest('.serve-pin'); if (!pin || getComputedStyle(pin).position !== 'sticky') return;
           const sec = document.getElementById('serve'), r = sec.getBoundingClientRect();
-          const pr = Math.min(1, ch.offsetLeft / (2.6 * window.innerWidth)), span = r.height - (vh - 64);
+          const pr = Math.min(1, ch.offsetLeft / (1.85 * window.innerWidth)), span = r.height - (vh - 64);
           pin.scrollLeft = 0; pin.scrollTop = 0;
           window.scrollTo(0, r.top + window.scrollY - 64 + pr * span);
         } else if (li) {
@@ -856,11 +857,11 @@ class Component extends DCLogic {
       rPrev: () => rGo(-1), rNext: () => rGo(1),
       onResKey: (e) => { if (e.key === 'ArrowRight') { e.preventDefault(); rGo(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); rGo(-1); } },
       ddClose: (e) => { if (e.target.closest && e.target.closest('a')) this.setState({ dd: -1 }); },
-      serveX: 'translateX(' + (-this.state.serveP * 260).toFixed(3) + 'vw)',
+      serveX: 'translateX(' + (-this.state.serveP * 185).toFixed(3) + 'vw)',
       serveBar: (this.state.serveP * 100).toFixed(1) + '%',
-      serveNum: '0' + Math.min(3, Math.max(1, Math.round(this.state.serveP * 3) || 1)),
-      serveUiColor: this.state.serveP < 0.17 ? '#5C6760' : '#FFFFFF',
-      serveTrack: this.state.serveP < 0.17 ? 'rgba(30,43,34,0.15)' : 'rgba(255,255,255,0.3)',
+      serveNum: '0' + Math.min(3, Math.max(1, Math.floor((this.state.serveP * 185 - 10) / 75) + 1)),
+      serveUiColor: this.state.serveP < 0.33 ? '#5C6760' : '#FFFFFF',
+      serveTrack: this.state.serveP < 0.33 ? 'rgba(30,43,34,0.15)' : 'rgba(255,255,255,0.3)',
       doBar: (this.state.doP * 100).toFixed(1) + '%',
       headH: this.state.scrolled ? '64px' : '80px', headMb: this.state.scrolled ? '-64px' : '-80px',
       headBg: this.state.scrolled || this.state.menuOpen || this.state.dd > -1 ? 'rgba(17,21,18,0.94)' : 'transparent',
